@@ -2,6 +2,30 @@
 # Sylvan Moore and Brian Nguyen
 # 12/4/2021
 
+# Logic operations to validate input using AON straight line
+def AND(a,b):
+    return str(int(a)*int(b))
+
+def OR(a,b):
+    return str(int(a)+int(b) - int(a)*int(b))
+
+def NOT(a):
+    return str(1-int(a))
+
+def XOR(a,b):
+    not_a = NOT(a)
+    not_b = NOT(b)
+    a_not_b = AND(a, not_b)
+    b_not_a = AND(b, not_a)
+    return OR(a_not_b, b_not_a)
+
+# Helper to ensure input is valid
+def is_binary(input):
+    for bit in input:
+        if bit != '1' and bit != '0':
+            return False
+    return True
+
 if __name__ == '__main__':
     # Dictionary of problems and their answers
     print("\nWelcome to the Circuit CLI Game by Sylvan and Brian! Enter answers to problems below to play, and ctrl + C to quit.\n")
@@ -13,10 +37,25 @@ if __name__ == '__main__':
         # Have the user guess until they get the current problem right
         while True:
             user_guess = input("Answer: ")
+            # Make sure input is binary
+            if not is_binary(user_guess):
+                print("Please enter a binary number with no spaces!")
+                continue
             guesses += 1
-            if user_guess != problems[key]:
+            # Using AON straight line to validate input
+            guessIsCorrect = True
+            index = 0
+            # Go bit by bit
+            for bit in user_guess:
+                # Does the guess have too many bits? Are the bits not equal?
+                if index >= len(problems[key]) or XOR(bit, problems[key][index]) == '1':
+                    guessIsCorrect = False
+                    break
+                index += 1
+            # Equivalent to not using AON straight line and simply checking user_guess != problems[key]
+            if not guessIsCorrect or index != len(problems[key]):
                 print("Wrong answer, try again!")
             # If the guess is right, proceed to the next problem
             else:
-                print("\nRight answer! It took you " + str(guesses) + " tries. Here's the next level...\n")
+                print("\nRight answer! It took you " + str(guesses) + " trie(s). Here's the next level...\n")
                 break
