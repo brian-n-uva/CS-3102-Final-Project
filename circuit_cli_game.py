@@ -42,18 +42,7 @@ if __name__ == '__main__':
                 print("Please enter a binary number with no spaces!")
                 continue
             guesses += 1
-            # Using AON straight line to validate input
-            guessIsCorrect = True
-            index = 0
-            # Go bit by bit
-            for bit in user_guess:
-                # Does the guess have too many bits? Are the bits not equal?
-                if index >= len(problems[key]) or XOR(bit, problems[key][index]) == '1':
-                    guessIsCorrect = False
-                    break
-                index += 1
-            # Equivalent to not using AON straight line and simply checking user_guess != problems[key]
-            if not guessIsCorrect or index != len(problems[key]):
+            if user_guess != problems[key]:
                 print("Wrong answer, try again!")
             # If the guess is right, proceed to the next problem
             else:

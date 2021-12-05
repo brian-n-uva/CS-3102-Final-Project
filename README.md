@@ -11,7 +11,7 @@ python3 circuit_cli_game.py
 in any terminal.
 
 ## Notes On Implementation
-Instead of simply checking equality using '==', correct answers are validated using AON straight line programming!
+To validate correct answers, the logic of the circuit is performed with given input using AON!
 
 ## Demo
 INSERT HERE
