@@ -2,6 +2,65 @@
 # Sylvan Moore and Brian Nguyen
 # 12/4/2021
 
+# Ascii art circuit problems to display to the terminal, used in main
+CIRCUIT_PROBLEMS = [
+'      *Input*\n'
+'   [_]      [_]\n'
+'    |____    |\n'
+'    |    |   |\n'
+'    |   NOT  |\n'
+'    |   \-/  |\n'
+'    |    v   |\n'
+'    |    o   |\n'
+'    |   _|   |_\n'
+'    |  |  \_/  |\n'
+'    |  \   OR  /\n'
+'    |   \     /\n'
+'    |     \ /\n'
+'    |_    _|\n'
+'      |   |\n'
+'     _|___|_\n'
+'    |       |\n'
+'    |  AND  |\n'
+'    [       ]\n'
+'     \ ___ /\n'
+'        |\n'
+'        |\n'
+'     *Output*\n',
+
+'         *Input*\n'
+' [_]   [_]     [_]    [_]\n'
+'  |    _|___    |      |\n'
+'  |   |     |   |     NOT\n'
+'  |  NOT    |   |     \-/\n'
+'  |  \-/    |   |      v\n'
+'  |   v     |   |      o\n'
+'  |   o     |   |      |\n'
+' _|   |_   _|___|_     |\n'
+'|  \_/  | |       |    |\n'
+'\  NOR  / |  AND  |    |\n'
+' \     /  [       ]    |\n'
+'   \ /     \ ___ /     |\n'
+'    o         |        |\n'
+'    |__     __|__     _|\n'
+'       |   |     |   |\n'
+'      _|   |_   _|___|_ \n'
+'     |  \_/  | |       |\n'
+'     \  OR   / |  AND  |\n'
+'      \     /  [       ]\n'
+'        \ /     \ ___ /\n'
+'         |__     __|\n'
+'           _|   |_\n'
+'           _|\_/|_\n'
+'          |  \_/  |\n'
+'          \  XOR  /\n'
+'           \     /\n'
+'             \ /\n'
+'              |\n'
+'              |\n'
+'           *Output*\n'
+]
+
 # Logic operations to validate input using AON straight line
 def AND(a,b):
     return str(int(a)*int(b))
