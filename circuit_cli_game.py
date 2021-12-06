@@ -137,6 +137,12 @@ STORY_SCENES = [
 
 ]
 
+STORY_SCENES_CAPTIONS = [
+    'In the year 3012, scientists invented a new super-robot that would be able to mine bitcoin 3000000.00% faster than any robot before. Press any key to continue...',
+    'BOOM!!! Press any key to continue...',
+    'It turns out that the robot was evil and wanted to destroy all life. Press any key to continue...',
+]
+
 # Ascii art circuit problems to display to the terminal, used in main
 CIRCUIT_PROBLEMS = [
 '      *Input*\n'
@@ -266,24 +272,27 @@ def is_binary(input):
 if __name__ == '__main__':
     # Prologue
     print("\nWelcome to the Circuit CLI Game by Sylvan and Brian! Enter answers to problems below to play, and ctrl + C to quit.\n")
-    for scene in STORY_SCENES:
-        print(scene)
+    for i in range(3):
+        print(STORY_SCENES[i] + '\n')
+        exit = input(STORY_SCENES_CAPTIONS[i])
     # Dictionary which maps circuit problems to functions that perform their logic and their number of inputs
     problems = {CIRCUIT_PROBLEMS[0] : (circuit_1, 2), CIRCUIT_PROBLEMS[1] : (circuit_2, 4), CIRCUIT_PROBLEMS[2] : (circuit_3, 5) }
     problems_solved = [False, False, False]
     menu_options = {'0', '1', '10', '11'}
     while True:
         if problems_solved[0] and problems_solved[1] and problems_solved[2]:
-            print('You solved all the circuits! THE END')
+            exit = input('Congratulations! You defeated the evil robot! You receive $1,000,000 dollars and everyone likes you now. The End. Press any key to continue...')
+            print('\nMade by Brian Nguyen and Sylvan Moore\n')
+            print('With ASCII Art from Brian Green, Tom Harvey, Jussi Roine and jro\n')
             break
         print(MENUS[0] + '\n')
-        option_chosen = input('Choose an option to play or view (0, 1, 10, or 11): ')
+        option_chosen = input('After hours of searching, you find the robot in the ruins of the lab on cooldown after its attack. Nows your chance to figure out a way to shut it off. Choose an option to continue... (0, 1, 10, or 11): ')
         if option_chosen in menu_options:
             if option_chosen == '0':
                 print(MENUS[1] + '\n')
-                exit = input('To go back, enter any character: ')
+                exit = input('Somehow this book survived the blast. Perhaps it has some useful information in it. Too bad you are a STEM major and cannot read. Press any key to continue...')
             elif option_chosen == '1':
-                print('\nSolve the arm circuit! To go back to the menu, type q\n')
+                print('\nSolve the arm circuit by entering a 2-digit binary number to designate its input. Enter q to go back\n')
                 guesses = 0
                 print(CIRCUIT_PROBLEMS[0])
                 # Have the user guess until they get the current problem right, or they quit
@@ -309,14 +318,14 @@ if __name__ == '__main__':
                     is_correct = problems[CIRCUIT_PROBLEMS[0]][0](guess_bits)
                     # Is the guess wrong?
                     if not is_correct:
-                        print("Wrong answer, try again!")
+                        print("You set the inputs to the circuit. It doesnt seem to do anything")
                     # If the guess is right, proceed to the next problem
                     else:
                         print("\nRight answer! It took you " + str(guesses) + " trie(s). Let's try another...\n")
                         problems_solved[0] = True
                         break
             elif option_chosen == '10':
-                print('\nSolve the body circuit! To go back to the menu, type q\n')
+                print('\nSolve the body circuit by entering a 4-digit binary number to designate its input. Enter q to go back\n')
                 guesses = 0
                 print(CIRCUIT_PROBLEMS[1])
                 # Have the user guess until they get the current problem right, or they quit
@@ -342,14 +351,14 @@ if __name__ == '__main__':
                     is_correct = problems[CIRCUIT_PROBLEMS[1]][0](guess_bits)
                     # Is the guess wrong?
                     if not is_correct:
-                        print("Wrong answer, try again!")
+                        print("You set the inputs to the circuit. It doesnt seem to do anything")
                     # If the guess is right, proceed to the next problem
                     else:
                         print("\nRight answer! It took you " + str(guesses) + " trie(s). Let's try another...\n")
                         problems_solved[1] = True
                         break
             elif option_chosen == '11':
-                print('\nSolve the head circuit! To go back to the menu, type q\n')
+                print('\nSolve the head circuit by entering a 5-digit binary number to designate its input. Enter q to go back\n')
                 guesses = 0
                 print(CIRCUIT_PROBLEMS[2])
                 # Have the user guess until they get the current problem right, or they quit
@@ -375,7 +384,7 @@ if __name__ == '__main__':
                     is_correct = problems[CIRCUIT_PROBLEMS[2]][0](guess_bits)
                     # Is the guess wrong?
                     if not is_correct:
-                        print("Wrong answer, try again!")
+                        print("You set the inputs to the circuit. It doesnt seem to do anything")
                     # If the guess is right, proceed to the next problem
                     else:
                         print("\nRight answer! It took you " + str(guesses) + " trie(s). Let's try another...\n")
