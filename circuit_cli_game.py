@@ -58,7 +58,9 @@ CIRCUIT_PROBLEMS = [
 '             \ /\n'
 '              |\n'
 '              |\n'
-'           *Output*\n'
+'           *Output*\n',
+
+'circuit 3'
 ]
 
 # Simulates circuit 1
@@ -68,6 +70,10 @@ def circuit_1(bits):
 # Simulates circuit 2
 def circuit_2(bits):
     return (not bits[0] or bits[2]) and bits[1] and (not bits[2] or bits[3])
+
+# Simulates circuit 3
+def circuit_3(bits):
+    return (not bits[0] and not bits[1] and bits[3]) or (bits[1] and bits[3] and bits[4]) or (not bits[1] and bits[2] and not bits[3] and bits[4])
 
 # Helper to ensure input is valid
 def is_binary(input):
@@ -79,7 +85,7 @@ def is_binary(input):
 if __name__ == '__main__':
     # Dictionary which maps circuit problems to functions that perform their logic and their number of inputs
     print("\nWelcome to the Circuit CLI Game by Sylvan and Brian! Enter answers to problems below to play, and ctrl + C to quit.\n")
-    problems = {CIRCUIT_PROBLEMS[0] : (circuit_1, 2), CIRCUIT_PROBLEMS[1] : (circuit_2, 4) }
+    problems = {CIRCUIT_PROBLEMS[0] : (circuit_1, 2), CIRCUIT_PROBLEMS[1] : (circuit_2, 4), CIRCUIT_PROBLEMS[2] : (circuit_3, 5) }
     # Loop through each problem
     for key, value in problems.items():
         guesses = 0
@@ -96,13 +102,13 @@ if __name__ == '__main__':
                 print("Please enter the correct number of input bits!")
                 continue
             guesses += 1
-            # Is the guess wrong?
             # Extract the input
             guess_bits = []
             for bit in user_guess:
                 guess_bits.append(int(bit))
             # Simulate circuit with the input
             is_correct = problems[key][0](guess_bits)
+            # Is the guess wrong?
             if not is_correct:
                 print("Wrong answer, try again!")
             # If the guess is right, proceed to the next problem
