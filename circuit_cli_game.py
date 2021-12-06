@@ -61,22 +61,13 @@ CIRCUIT_PROBLEMS = [
 '           *Output*\n'
 ]
 
-# Logic operations to validate input using AON straight line
-def AND(a,b):
-    return str(int(a)*int(b))
+# Simulates circuit 1
+def circuit_1(bits):
+    return bits[0] and bits[1]
 
-def OR(a,b):
-    return str(int(a)+int(b) - int(a)*int(b))
-
-def NOT(a):
-    return str(1-int(a))
-
-def XOR(a,b):
-    not_a = NOT(a)
-    not_b = NOT(b)
-    a_not_b = AND(a, not_b)
-    b_not_a = AND(b, not_a)
-    return OR(a_not_b, b_not_a)
+# Simulates circuit 2
+def circuit_2(bits):
+    return (not bits[0] or bits[2]) and bits[1] and (not bits[2] or bits[3])
 
 # Helper to ensure input is valid
 def is_binary(input):
@@ -86,9 +77,9 @@ def is_binary(input):
     return True
 
 if __name__ == '__main__':
-    # Dictionary of problems and their answers
+    # Dictionary which maps circuit problems to functions that perform their logic and their number of inputs
     print("\nWelcome to the Circuit CLI Game by Sylvan and Brian! Enter answers to problems below to play, and ctrl + C to quit.\n")
-    problems = {'Problem 1' : '0101', 'Problem 2' : '01001' }
+    problems = {CIRCUIT_PROBLEMS[0] : (circuit_1, 2), CIRCUIT_PROBLEMS[1] : (circuit_2, 4) }
     # Loop through each problem
     for key, value in problems.items():
         guesses = 0
@@ -100,8 +91,19 @@ if __name__ == '__main__':
             if not is_binary(user_guess):
                 print("Please enter a binary number with no spaces!")
                 continue
+            # Are the wrong number of bits provided?
+            if len(user_guess) != problems[key][1]:
+                print("Please enter the correct number of input bits!")
+                continue
             guesses += 1
-            if user_guess != problems[key]:
+            # Is the guess wrong?
+            # Extract the input
+            guess_bits = []
+            for bit in user_guess:
+                guess_bits.append(int(bit))
+            # Simulate circuit with the input
+            is_correct = problems[key][0](guess_bits)
+            if not is_correct:
                 print("Wrong answer, try again!")
             # If the guess is right, proceed to the next problem
             else:
