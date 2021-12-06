@@ -264,45 +264,124 @@ def is_binary(input):
     return True
 
 if __name__ == '__main__':
-    # Dictionary which maps circuit problems to functions that perform their logic and their number of inputs
+    # Prologue
     print("\nWelcome to the Circuit CLI Game by Sylvan and Brian! Enter answers to problems below to play, and ctrl + C to quit.\n")
+    for scene in STORY_SCENES:
+        print(scene)
+    # Dictionary which maps circuit problems to functions that perform their logic and their number of inputs
     problems = {CIRCUIT_PROBLEMS[0] : (circuit_1, 2), CIRCUIT_PROBLEMS[1] : (circuit_2, 4), CIRCUIT_PROBLEMS[2] : (circuit_3, 5) }
-    # Loop through each problem
-    for key, value in problems.items():
-        guesses = 0
-        print(key)
-        # Have the user guess until they get the current problem right
-        while True:
-            user_guess = input("Answer: ")
-            # Make sure input is binary
-            if not is_binary(user_guess):
-                print("Please enter a binary number with no spaces!")
-                continue
-            # Are the wrong number of bits provided?
-            if len(user_guess) != problems[key][1]:
-                print("Please enter the correct number of input bits!")
-                continue
-            guesses += 1
-            # Extract the input
-            guess_bits = []
-            for bit in user_guess:
-                guess_bits.append(int(bit))
-            # Simulate circuit with the input
-            is_correct = problems[key][0](guess_bits)
-            # Is the guess wrong?
-            if not is_correct:
-                print("Wrong answer, try again!")
-            # If the guess is right, proceed to the next problem
-            else:
-                print("\nRight answer! It took you " + str(guesses) + " trie(s). Here's the next level...\n")
-                break
+    problems_solved = [False, False, False]
+    menu_options = {'0', '1', '10', '11'}
+    while True:
+        if problems_solved[0] and problems_solved[1] and problems_solved[2]:
+            print('You solved all the circuits! THE END')
+            break
+        print(MENUS[0] + '\n')
+        option_chosen = input('Choose an option to play or view (0, 1, 10, or 11): ')
+        if option_chosen in menu_options:
+            if option_chosen == '0':
+                print(MENUS[1] + '\n')
+                exit = input('To go back, enter any character: ')
+            elif option_chosen == '1':
+                print('\nSolve the arm circuit! To go back to the menu, type q\n')
+                guesses = 0
+                print(CIRCUIT_PROBLEMS[0])
+                # Have the user guess until they get the current problem right, or they quit
+                while True:
+                    user_guess = input("Answer: ")
+                    # If they wish to go to the menu
+                    if user_guess == 'q':
+                        break
+                    # Make sure input is binary
+                    if not is_binary(user_guess):
+                        print("Please enter a binary number with no spaces!")
+                        continue
+                    # Are the wrong number of bits provided?
+                    if len(user_guess) != problems[CIRCUIT_PROBLEMS[0]][1]:
+                        print("Please enter the correct number of input bits!")
+                        continue
+                    guesses += 1
+                    # Extract the input
+                    guess_bits = []
+                    for bit in user_guess:
+                        guess_bits.append(int(bit))
+                    # Simulate circuit with the input
+                    is_correct = problems[CIRCUIT_PROBLEMS[0]][0](guess_bits)
+                    # Is the guess wrong?
+                    if not is_correct:
+                        print("Wrong answer, try again!")
+                    # If the guess is right, proceed to the next problem
+                    else:
+                        print("\nRight answer! It took you " + str(guesses) + " trie(s). Let's try another...\n")
+                        problems_solved[0] = True
+                        break
+            elif option_chosen == '10':
+                print('\nSolve the body circuit! To go back to the menu, type q\n')
+                guesses = 0
+                print(CIRCUIT_PROBLEMS[1])
+                # Have the user guess until they get the current problem right, or they quit
+                while True:
+                    user_guess = input("Answer: ")
+                    # If they wish to go to the menu
+                    if user_guess == 'q':
+                        break
+                    # Make sure input is binary
+                    if not is_binary(user_guess):
+                        print("Please enter a binary number with no spaces!")
+                        continue
+                    # Are the wrong number of bits provided?
+                    if len(user_guess) != problems[CIRCUIT_PROBLEMS[1]][1]:
+                        print("Please enter the correct number of input bits!")
+                        continue
+                    guesses += 1
+                    # Extract the input
+                    guess_bits = []
+                    for bit in user_guess:
+                        guess_bits.append(int(bit))
+                    # Simulate circuit with the input
+                    is_correct = problems[CIRCUIT_PROBLEMS[1]][0](guess_bits)
+                    # Is the guess wrong?
+                    if not is_correct:
+                        print("Wrong answer, try again!")
+                    # If the guess is right, proceed to the next problem
+                    else:
+                        print("\nRight answer! It took you " + str(guesses) + " trie(s). Let's try another...\n")
+                        problems_solved[1] = True
+                        break
+            elif option_chosen == '11':
+                print('\nSolve the head circuit! To go back to the menu, type q\n')
+                guesses = 0
+                print(CIRCUIT_PROBLEMS[2])
+                # Have the user guess until they get the current problem right, or they quit
+                while True:
+                    user_guess = input("Answer: ")
+                    # If they wish to go to the menu
+                    if user_guess == 'q':
+                        break
+                    # Make sure input is binary
+                    if not is_binary(user_guess):
+                        print("Please enter a binary number with no spaces!")
+                        continue
+                    # Are the wrong number of bits provided?
+                    if len(user_guess) != problems[CIRCUIT_PROBLEMS[2]][1]:
+                        print("Please enter the correct number of input bits!")
+                        continue
+                    guesses += 1
+                    # Extract the input
+                    guess_bits = []
+                    for bit in user_guess:
+                        guess_bits.append(int(bit))
+                    # Simulate circuit with the input
+                    is_correct = problems[CIRCUIT_PROBLEMS[2]][0](guess_bits)
+                    # Is the guess wrong?
+                    if not is_correct:
+                        print("Wrong answer, try again!")
+                    # If the guess is right, proceed to the next problem
+                    else:
+                        print("\nRight answer! It took you " + str(guesses) + " trie(s). Let's try another...\n")
+                        problems_solved[2] = True
+                        break
+        else:
+            print('Please choose a valid option!')
 
 
-# while
-  # ask input
-  # case 1
-    #while
-     #break
-  # case 2
-    #while
-     #break
